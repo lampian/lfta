@@ -1,4 +1,4 @@
-name: lfta_question1
+name: lfta_question2
 description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
@@ -9,6 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_redux: ^0.10.0
+  get_it: ^7.6.4
+  redux: ^5.0.0
 
 dev_dependencies:
   flutter_test:
