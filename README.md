@@ -2,7 +2,7 @@
 
 ## Screen shots
 
-![Image](RM1.png)
+<img src="RM1.png" height="150">
 
 ## General Comments
 
