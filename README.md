@@ -2,7 +2,7 @@
 
 ## Screen shots
 
-![Image](R&M list view.png)
+![Image](RM1.png)
 
 ## General Comments
 
