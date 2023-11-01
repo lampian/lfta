@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lfta_question1/core/api_services/colors.dart';
 import '../bloc/characters_bloc.dart';
 import '../components/app_snack_bar.dart';
 import '../components/characters_failed.dart';
@@ -23,18 +24,19 @@ class _CharactersPageState extends State<CharactersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background1,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.white1,
         title: const Text(
           'Rick & Morty',
           style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Colors.white70,
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+            color: AppColors.gray2,
           ),
         ),
       ),
-      body: const Text('page'),
+      body: const CharactersPageBody(),
     );
   }
 }

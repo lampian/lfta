@@ -14,7 +14,7 @@ class CharacterModel {
   final String gender;
   final OriginModel origin;
   final LocationModel location;
-  final String imageUrl;
+  final String image;
   final String url;
   final String created;
 
@@ -27,7 +27,7 @@ class CharacterModel {
     this.gender = '',
     this.origin = const OriginModel(),
     this.location = const LocationModel(),
-    this.imageUrl = '',
+    this.image = '',
     this.url = '',
     this.created = '',
   });
@@ -41,7 +41,7 @@ class CharacterModel {
       created: created,
       gender: gender,
       id: id,
-      imageUrl: imageUrl,
+      imageUrl: image,
       locationName: location.name,
       locationUrl: location.url,
       name: name,

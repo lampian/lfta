@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lfta_question1/core/api_services/colors.dart';
 import '../../domain/entity/character.dart';
 
 class CharactersTile extends StatelessWidget {
@@ -11,15 +12,12 @@ class CharactersTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var venue = '';
-    var city = '';
-    var since = '';
-    var subTitle = '$venue$city$since';
+    final otherWidth = MediaQuery.of(context).size.width * 0.6;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.black12,
+          color: AppColors.gray1,
           borderRadius: BorderRadius.circular(3),
         ),
         child: Padding(
@@ -27,13 +25,24 @@ class CharactersTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TeamLabel(character: character),
-                  const SizedBox(height: 8),
-                  HomeInfo(subTitle: subTitle),
-                ],
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                child: Image.network(
+                  character.imageUrl,
+                  height: 80,
+                ),
+              ),
+              // TODO(dev): use CustomNetworkImage
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    NameLabel(character: character),
+                    const SizedBox(height: 8),
+                    OtherInfo(character: character, width: otherWidth),
+                  ],
+                ),
               ),
               CallToActionShowDetail(character: character),
             ],
@@ -44,8 +53,8 @@ class CharactersTile extends StatelessWidget {
   }
 }
 
-class TeamLabel extends StatelessWidget {
-  const TeamLabel({
+class NameLabel extends StatelessWidget {
+  const NameLabel({
     super.key,
     required this.character,
   });
@@ -55,37 +64,42 @@ class TeamLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '${character.name}',
+      character.name,
       style: const TextStyle(
-          color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w800),
+        color: AppColors.white1,
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+      ),
     );
   }
 }
 
-class HomeInfo extends StatelessWidget {
-  const HomeInfo({
+class OtherInfo extends StatelessWidget {
+  const OtherInfo({
     super.key,
-    required this.subTitle,
+    required this.character,
+    required this.width,
   });
 
-  final String subTitle;
+  final Character character;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Icon(
-          Icons.home,
-          color: Colors.black45,
-          size: 16,
+    final subTitle = 'I am a ${character.gender.toLowerCase()} '
+        '${character.species.toLowerCase()} from ${character.locationName}';
+    return SizedBox(
+      width: width,
+      child: Text(
+        subTitle,
+        maxLines: 2,
+        overflow: TextOverflow.clip,
+        style: const TextStyle(
+          color: AppColors.white1,
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
         ),
-        const SizedBox(width: 8),
-        Text(
-          subTitle,
-          style: const TextStyle(
-              color: Colors.black54, fontSize: 12, fontWeight: FontWeight.w500),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -111,7 +125,7 @@ class CallToActionShowDetail extends StatelessWidget {
           alignment: Alignment.centerRight,
           child: Icon(
             Icons.chevron_right,
-            color: Colors.black54,
+            color: AppColors.white1,
           ),
         ),
       ),
