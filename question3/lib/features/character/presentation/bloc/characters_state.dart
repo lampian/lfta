@@ -1,6 +1,15 @@
 part of 'characters_bloc.dart';
 
-@immutable
-sealed class CharactersState {}
+enum GetCharactersStatus { initial, success, failed, loading, endOfList }
 
-final class CharactersInitial extends CharactersState {}
+class CharactersState {
+  final GetCharactersStatus status;
+  final List<Character> characters;
+  final String message;
+
+  const CharactersState({
+    this.status = GetCharactersStatus.initial,
+    this.characters = const [],
+    this.message = '',
+  });
+}

@@ -13,7 +13,7 @@ class CharactersDataSourceImpl implements CharactersDataSource {
   Future<Either<String, List<Character>>> getCharctersFromApi({
     required int page,
   }) async {
-    final method = 'character?page=$page';
+    final method = '/api/character?page=$page';
     try {
       final result = await client.get(method: method);
       if (result.statusCode == 200) {
