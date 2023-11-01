@@ -2,7 +2,7 @@
 
 ## Screen shots
 
-<img src="RM1.png" height="150">
+<img src="RM1.png" height="350">
 
 ## General Comments
 
