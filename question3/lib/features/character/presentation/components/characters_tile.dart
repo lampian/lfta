@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lfta_question1/core/api_services/colors.dart';
+import 'package:lfta_question1/features/character/presentation/page/characters_detail_page.dart';
 import '../../domain/entity/character.dart';
 
 class CharactersTile extends StatelessWidget {
@@ -115,8 +116,12 @@ class CallToActionShowDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // TODO(dev): add jump to detail
+      onTap: () async {
+        await Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return CharacterDetailPage(character: character);
+          },
+        ));
       },
       child: const SizedBox(
         width: 50,

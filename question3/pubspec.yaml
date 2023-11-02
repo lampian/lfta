@@ -17,6 +17,7 @@ dependencies:
   json_annotation: ^4.8.1
   stream_transform: ^2.1.0
   cached_network_image: ^3.3.0
+  intl: ^0.18.1
 
 dev_dependencies:
   build_runner: ^2.4.6
