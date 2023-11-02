@@ -11,7 +11,15 @@ class MethodChannelIsconnected extends IsconnectedPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
+  }
+
+  @override
+  Future<String?> getConnectionStatus() async {
+    final status =
+        await methodChannel.invokeMethod<String>('getConnectionStatus');
+    return status;
   }
 }

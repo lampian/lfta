@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:isconnected/isconnected.dart';
+import 'package:isconnected/isconnected_method_channel.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _connectionStatus = 'Unknown';
   final _isconnectedPlugin = Isconnected();
+  final _eventChannel = const EventChannel('eventChannel');
+  List<String> receivedValues = [];
 
   @override
   void initState() {
@@ -49,13 +53,47 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final eventStream =
+        _eventChannel.receiveBroadcastStream().distinct().map((event) {
+      return event;
+    });
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              const SizedBox(height: 32),
+              Text('Connection status: $_connectionStatus'),
+              FilledButton(
+                onPressed: () async {
+                  final result =
+                      await MethodChannelIsconnected().getConnectionStatus();
+                  setState(() {
+                    _connectionStatus = result ?? 'Unknown';
+                  });
+                },
+                child: const Text(
+                  'Click to check status',
+                ),
+              ),
+              const SizedBox(height: 32),
+              StreamBuilder(
+                stream: eventStream,
+                builder: (context, snapshot) {
+                  debugPrint(snapshot.data);
+                  final status = snapshot.data ?? 'No data';
+                  return Text('Streamed status: $status');
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

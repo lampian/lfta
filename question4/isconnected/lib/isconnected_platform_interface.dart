@@ -26,4 +26,8 @@ abstract class IsconnectedPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<String?> getConnectionStatus() {
+    throw UnimplementedError('getConnectionStatus() has not been implemented.');
+  }
 }
