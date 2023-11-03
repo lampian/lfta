@@ -57,6 +57,7 @@ class CharactersPageBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        debugPrint('## bloc ${state.status} len: ${state.characters.length}');
         // TODO(dev): replace with modified switch using dart 3 ?
         if (state.status == GetCharactersStatus.failed) {
           return const CharactersFailed(

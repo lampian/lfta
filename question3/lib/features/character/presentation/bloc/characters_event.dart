@@ -11,3 +11,11 @@ class GetNextEvent extends CharactersEvent {
   @override
   List<Object?> get props => [];
 }
+
+class FilterEvent extends CharactersEvent {
+  final String filterValue;
+
+  FilterEvent(this.filterValue);
+  @override
+  List<Object?> get props => [];
+}

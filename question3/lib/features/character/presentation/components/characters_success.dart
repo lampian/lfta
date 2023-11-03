@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lfta_question1/features/character/presentation/components/search_tile.dart';
 
 import '../../domain/entity/character.dart';
 import '../bloc/characters_bloc.dart';
@@ -32,19 +33,29 @@ class _CharactersSuccessState extends State<CharactersSuccess> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: scrollController,
-      itemCount: widget.characters.length,
-      itemBuilder: (context, index) {
-        return CharactersTile(character: widget.characters[index]);
-      },
+    return Column(
+      children: [
+        const SearchTile(),
+        Expanded(
+          child: ListView.builder(
+            controller: scrollController,
+            itemCount: widget.characters.length,
+            itemBuilder: (context, index) {
+              return CharactersTile(character: widget.characters[index]);
+            },
+          ),
+        ),
+      ],
     );
   }
 
   void _scrollListener() {
-    if (scrollController.position.extentAfter < 50) {
-      debugPrint('## => GetNextTeamsEvent()');
-      context.read<CharactersBloc>().add(GetNextEvent());
+    if (scrollController.position.extentAfter < 80) {
+      final status = context.read<CharactersBloc>().state.status;
+      if (status != GetCharactersStatus.loading) {
+        debugPrint('## scroll listner => GetNextTeamsEvent()');
+        context.read<CharactersBloc>().add(GetNextEvent());
+      }
     }
   }
 }
